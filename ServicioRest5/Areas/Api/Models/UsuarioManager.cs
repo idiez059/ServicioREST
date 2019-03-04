@@ -6,23 +6,24 @@ using System.Data.SqlClient;
 
 namespace ServicioRest5.Areas.Api.Models
 {
-    public class ClienteManager
+    public class UsuarioManager
     {
         private static string cadenaConexion =
             @"Server=DESKTOP-NSHQPSH;Initial Catalog=BDCalorias;Integrated Security=True";
 
-        public bool InsertarCliente(Cliente cli)
+        public bool insertarUsuario(Usuario usu)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
 
             con.Open();
 
-            string sql = "INSERT INTO Clientes (Nombre, Telefono) VALUES (@nombre, @telefono)";
+            string sql = "INSERT INTO usuario (email, password, foto) VALUES (@email, @password, @foto)";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = cli.Nombre;
-            cmd.Parameters.Add("@telefono", System.Data.SqlDbType.Int).Value = cli.Telefono;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
+            cmd.Parameters.Add("@password", System.Data.SqlDbType.NVarChar).Value = usu.password;
+            cmd.Parameters.Add("@foto", System.Data.SqlDbType.NVarChar).Value = usu.foto;
 
             int res = cmd.ExecuteNonQuery();
 
@@ -31,19 +32,20 @@ namespace ServicioRest5.Areas.Api.Models
             return (res == 1);
         }
 
-        public bool ActualizarCliente(Cliente cli)
+        public bool ActualizarCliente(Usuario usu)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
-
+            
             con.Open();
 
-            string sql = "UPDATE Clientes SET Nombre = @nombre, Telefono = @telefono WHERE IdCliente = @idcliente";
+            string sql = "UPDATE usuario SET email = @email, password = @password, foto = @foto" +
+                " WHERE email = @email";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = cli.Nombre;
-            cmd.Parameters.Add("@telefono", System.Data.SqlDbType.Int).Value = cli.Telefono;
-            cmd.Parameters.Add("@idcliente", System.Data.SqlDbType.Int).Value = cli.Id;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
+            cmd.Parameters.Add("@password", System.Data.SqlDbType.Int).Value = usu.password;
+            cmd.Parameters.Add("@foto", System.Data.SqlDbType.Int).Value = usu.foto;
 
             int res = cmd.ExecuteNonQuery();
 
@@ -52,34 +54,34 @@ namespace ServicioRest5.Areas.Api.Models
             return (res == 1);
         }
 
-        public Cliente ObtenerCliente(int id)
+        public Usuario obtenerUsuario(string email)
         {
-            Cliente cli = null;
+            Usuario usu = null;
 
             SqlConnection con = new SqlConnection(cadenaConexion);
 
             con.Open();
 
-            string sql = "SELECT Nombre, Telefono FROM Clientes WHERE IdCliente = @idcliente";
+            string sql = "SELECT email, password, foto FROM usuario WHERE email = @email";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@idcliente", System.Data.SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
             SqlDataReader reader =
                  cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
-              
+
             if (reader.Read())
             {
-                cli = new Cliente();
-                cli.Id = id; 
-                cli.Nombre = reader.GetString(0);
-                cli.Telefono = reader.GetInt32(1);
+                usu = new Usuario();
+                usu.email = email;
+                usu.password= reader.GetString(0);
+                usu.foto = reader.GetString(1);
             }
 
             reader.Close();
 
-            return cli;
+            return usu;
         }
 
         public List<Cliente> ObtenerClientes()

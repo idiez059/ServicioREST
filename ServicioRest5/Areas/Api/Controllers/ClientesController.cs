@@ -33,7 +33,7 @@ namespace ServicioRest5.Areas.Api.Controllers
             switch (Request.HttpMethod)
             {
                 case "POST":
-                    return Json(clientesManager.insertarCalorias(item));
+                    return Json(clientesManager.InsertarCliente(item));
                 case "PUT":
                     return Json(clientesManager.ActualizarCliente(item));
                 case "GET":

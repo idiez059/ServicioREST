@@ -115,6 +115,7 @@
     <Compile Include="Areas\Api\Models\Cliente.cs" />
     <Compile Include="Areas\Api\Models\ClienteManager.cs" />
     <Compile Include="Areas\Api\Models\Usuario.cs" />
+    <Compile Include="Areas\Api\Models\UsuarioManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
