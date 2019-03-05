@@ -7,11 +7,11 @@ using ServicioRest5.Areas.Api.Models;
 
 namespace ServicioRest5.Areas.Api.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuariosController : Controller
     {
         private UsuarioManager usuariosManager;
 
-        public UsuarioController()
+        public UsuariosController()
         {
             usuariosManager = new UsuarioManager();
         }
