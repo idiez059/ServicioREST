@@ -7,52 +7,51 @@ using ServicioRest5.Areas.Api.Models;
 
 namespace ServicioRest5.Areas.Api.Controllers
 {
-    public class ClientesController : Controller
+    public class UsuarioController : Controller
     {
-        private ClienteManager clientesManager;
+        private UsuarioManager usuariosManager;
 
-        public ClientesController()
+        public UsuarioController()
         {
-            clientesManager = new ClienteManager();
+            usuariosManager = new UsuarioManager();
         }
 
-        // GET /Api/Clientes
+        //el GET /Api/Usuarios
         [HttpGet]
-        public JsonResult Clientes()
+        public JsonResult Usuarios()
         {
-            return Json(clientesManager.ObtenerClientes(), 
-                        JsonRequestBehavior.AllowGet);
+            return Json(usuariosManager.obtenerUsuarios(),
+                JsonRequestBehavior.AllowGet);
         }
 
         // POST    /Api/Clientes/Cliente    { Nombre:"nombre", Telefono:123456789 }
         // PUT     /Api/Clientes/Cliente/3  { Id:3, Nombre:"nombre", Telefono:123456789 }
         // GET     /Api/Clientes/Cliente/3
         // DELETE  /Api/Clientes/Cliente/3
-        public JsonResult Cliente(int? id, Cliente item)
+        public JsonResult Usuario(string email, Usuario item) //quitado string?
         {
             switch (Request.HttpMethod)
             {
                 case "POST":
-                    return Json(clientesManager.InsertarCliente(item));
+                    return Json(usuariosManager.insertarUsuario(item));
                 case "PUT":
-                    return Json(clientesManager.ActualizarCliente(item));
+                    return Json(usuariosManager.actualizarUsuario(item));
                 case "GET":
-                    return Json(clientesManager.ObtenerCliente(id.GetValueOrDefault()),
+                    return Json(usuariosManager.obtenerUsuario(email), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
                 case "DELETE":
-                    return Json(clientesManager.EliminarCliente(id.GetValueOrDefault()),
+                    return Json(usuariosManager.eliminarUsuario(email),// "
                         JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { Error = true, Message = "Operación HTTP desconocida" });
         }
-    //
+        //
         // GET: /Api/Clientes/
 
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }

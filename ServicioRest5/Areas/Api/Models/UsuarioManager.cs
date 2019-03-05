@@ -32,7 +32,7 @@ namespace ServicioRest5.Areas.Api.Models
             return (res == 1);
         }
 
-        public bool ActualizarCliente(Usuario usu)
+        public bool actualizarUsuario(Usuario usu)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
             
