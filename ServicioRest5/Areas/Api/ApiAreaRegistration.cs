@@ -15,33 +15,33 @@ namespace ServicioRest5.Areas.Api
         public override void RegisterArea(AreaRegistrationContext context)//hace falta ??
         {
             context.MapRoute(
-                "AccesoCliente",
-                "Api/Clientes/Cliente/{id}",
+                "AccesoUsuario",
+                "Api/Usuarios/Usuario/{email}",
                 new
                 {
-                    controller = "Clientes",
-                    action = "Cliente",
-                    id = UrlParameter.Optional
+                    controller = "Usuarios",
+                    action = "Usuario",
+                    email = UrlParameter.Optional
                 }
             );
 
             context.MapRoute(
-                "AccesoClientes",
-                "Api/Clientes",
+                "AccesoUsuarios",
+                "Api/Usuarios",
                 new
                 {
-                    controller = "Clientes",
-                    action = "Clientes"
+                    controller = "Usuarios",
+                    action = "Usuarios"
                 }
             );
 
             context.MapRoute(
                 "Api_default",
-                "Api/{controller}/{action}/{id}",
+                "Api/{controller}/{action}/{email}",
                 new
                 {
                     action = "Index",
-                    id = UrlParameter.Optional
+                    email = UrlParameter.Optional
                 }
             );
         }
