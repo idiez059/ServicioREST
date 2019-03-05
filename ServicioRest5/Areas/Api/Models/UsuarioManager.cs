@@ -84,15 +84,15 @@ namespace ServicioRest5.Areas.Api.Models
             return usu;
         }
 
-        public List<Cliente> ObtenerClientes()
+        public List<Usuario> obtenerUsuarios()
         {
-            List<Cliente> lista = new List<Cliente>();
+            List<Usuario> lista = new List<Usuario>();
 
             SqlConnection con = new SqlConnection(cadenaConexion);
 
             con.Open();
 
-            string sql = "SELECT IdCliente, Nombre, Telefono FROM Clientes";
+            string sql = "SELECT email, password, foto FROM usuario";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -101,14 +101,14 @@ namespace ServicioRest5.Areas.Api.Models
 
             while (reader.Read())
             {
-                Cliente cli = new Cliente();
+                Usuario usu = new Usuario();
 
-                cli = new Cliente();
-                cli.Id = reader.GetInt32(0);
-                cli.Nombre = reader.GetString(1);
-                cli.Telefono = reader.GetInt32(2);
+                usu = new Usuario();
+                usu.email = reader.GetString(0);
+                usu.password= reader.GetString(1);
+                usu.foto = reader.GetString(2);
 
-                lista.Add(cli);
+                lista.Add(usu);
             }
 
             reader.Close();
@@ -116,17 +116,17 @@ namespace ServicioRest5.Areas.Api.Models
             return lista;
         }
 
-        public bool EliminarCliente(int id)
+        public bool eliminarUsuario(string email)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
 
             con.Open();
 
-            string sql = "DELETE FROM Clientes WHERE IdCliente = @idcliente";
+            string sql = "DELETE FROM usuario WHERE email= @email";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@idcliente", System.Data.SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = email;
 
             int res = cmd.ExecuteNonQuery();
 
