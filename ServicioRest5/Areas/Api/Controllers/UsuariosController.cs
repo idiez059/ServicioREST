@@ -20,7 +20,7 @@ namespace ServicioRest5.Areas.Api.Controllers
         [HttpGet]
         public JsonResult Usuarios()
         {
-            return Json(usuariosManager.obtenerUsuarios(),
+            return Json(usuariosManager.ObtenerUsuarios(),
                 JsonRequestBehavior.AllowGet);
         }
 
@@ -33,14 +33,14 @@ namespace ServicioRest5.Areas.Api.Controllers
             switch (Request.HttpMethod)
             {
                 case "POST":
-                    return Json(usuariosManager.insertarUsuario(item));
+                    return Json(usuariosManager.InsertarUsuario(item));
                 case "PUT":
-                    return Json(usuariosManager.actualizarUsuario(item));
+                    return Json(usuariosManager.ActualizarUsuario(item));
                 case "GET":
-                    return Json(usuariosManager.obtenerUsuario(email), //quitado GetValueOrDefault()
+                    return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
                 case "DELETE":
-                    return Json(usuariosManager.eliminarUsuario(email),// "
+                    return Json(usuariosManager.EliminarUsuario(email),// "
                         JsonRequestBehavior.AllowGet);
             }
 

@@ -9,9 +9,10 @@ namespace ServicioRest5.Areas.Api.Models
     public class UsuarioManager
     {
         private static string cadenaConexion =
-            @"Server=DESKTOP-NSHQPSH;Initial Catalog=BDCalorias;Integrated Security=True";
+            @"Server=DESKTOP-NSHQPSH;Initial Catalog=BDCalorias;Integrated Security=True"; //Integrated Security en True, 
+                                                                                    //lo cambio a false
 
-        public bool insertarUsuario(Usuario usu)
+        public bool InsertarUsuario(Usuario usu)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
 
@@ -32,7 +33,7 @@ namespace ServicioRest5.Areas.Api.Models
             return (res == 1);
         }
 
-        public bool actualizarUsuario(Usuario usu)
+        public bool ActualizarUsuario(Usuario usu)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
             
@@ -54,7 +55,7 @@ namespace ServicioRest5.Areas.Api.Models
             return (res == 1);
         }
 
-        public Usuario obtenerUsuario(string email)
+        public Usuario ObtenerUsuario(string email)
         {
             Usuario usu = null;
 
@@ -66,7 +67,7 @@ namespace ServicioRest5.Areas.Api.Models
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = email;
             SqlDataReader reader =
                  cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
@@ -84,7 +85,7 @@ namespace ServicioRest5.Areas.Api.Models
             return usu;
         }
 
-        public List<Usuario> obtenerUsuarios()
+        public List<Usuario> ObtenerUsuarios()
         {
             List<Usuario> lista = new List<Usuario>();
 
@@ -116,7 +117,7 @@ namespace ServicioRest5.Areas.Api.Models
             return lista;
         }
 
-        public bool eliminarUsuario(string email)
+        public bool EliminarUsuario(string email)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
 
