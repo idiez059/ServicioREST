@@ -37,8 +37,18 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "PUT":
                     return Json(usuariosManager.ActualizarUsuario(item));
                 case "GET":
-                    return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
+                    if(email != null)
+                    {
+                        return Json(usuariosManager.ObtenerUsuarios(), 
                         JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
+                        JsonRequestBehavior.AllowGet);
+                    }
+
+                    
                 case "DELETE":
                     return Json(usuariosManager.EliminarUsuario(email),// "
                         JsonRequestBehavior.AllowGet);
