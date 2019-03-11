@@ -9,7 +9,7 @@ namespace ServicioRest5.Areas.Api.Models
     public class UsuarioManager
     {
         private static string cadenaConexion =
-            @"Server=DESKTOP-NSHQPSH;Initial Catalog=BDCalorias;Integrated Security=True"; //Integrated Security en True, 
+            @"Server=DESKTOP-3VURD55;Initial Catalog=BDCalorias;Integrated Security=true"; //Integrated Security en True, 
                                                                                     //lo cambio a false
 
         public bool InsertarUsuario(Usuario usu)

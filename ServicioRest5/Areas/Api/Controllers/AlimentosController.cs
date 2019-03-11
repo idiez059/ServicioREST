@@ -4,16 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ServicioRest5.Areas.Api.Models;
+using ServicioRest5;
 
 namespace ServicioRest5.Areas.Api.Controllers
 {
     public class AlimentosController : Controller
     {
         private UsuarioManager usuariosManager;
+        AlimentoManager alimentosManager;
 
         public AlimentosController()
         {
-            alimentosManager = new AlimentosManager();
+         alimentosManager = new AlimentoManager();
         }
 
         //el GET /Api/Alimentos
@@ -39,18 +41,18 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "GET":
                     if (codigo != null)
                     {
-                        return Json(alimentosManager.ObtenerAlimentos(),
+                        return Json(alimentosManager.ObtenerAlimento(codigo), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
                     }
                     else
-                    {
-                        return Json(alimentosManager.ObtenerAlimento(codigo), //quitado GetValueOrDefault()
+                    {                        
+                        return Json(alimentosManager.ObtenerAlimentos(),
                         JsonRequestBehavior.AllowGet);
                     }
 
 
                 case "DELETE":
-                    return Json(alimentosManager.EliminarAlimento(codigo),// "
+                    return Json(alimentosManager.EliminarAlimento(codigo),
                         JsonRequestBehavior.AllowGet);
             }
 

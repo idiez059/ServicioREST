@@ -34,12 +34,13 @@ namespace ServicioRest5.Areas.Api
                     action = "Usuarios"
                 }
             );
-            context.MapRoute("AccesoAlimentos",
+            context.MapRoute("AccesoAlimento",
                 "Api/Alimentos",
                 new
-                {
+                {                                               
                     controller = "Alimentos",
-                    action = "Alimento"
+                    action = "Alimentos",
+
                 });
             context.MapRoute("AccesoAlimentos",
                 "Api/Alimentos/Alimento/{codigo}",
@@ -56,7 +57,8 @@ namespace ServicioRest5.Areas.Api
                 new
                 {
                     action = "Index",
-                    email = UrlParameter.Optional
+                    email = UrlParameter.Optional,
+                    codigo = UrlParameter.Optional
                 }
             );
         }

@@ -39,12 +39,12 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "GET":
                     if(email != null)
                     {
-                        return Json(usuariosManager.ObtenerUsuarios(), 
-                        JsonRequestBehavior.AllowGet);
+                        return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
+                          JsonRequestBehavior.AllowGet);
                     }
                     else
-                    {
-                        return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
+                    {                        
+                        return Json(usuariosManager.ObtenerUsuarios(),
                         JsonRequestBehavior.AllowGet);
                     }
 

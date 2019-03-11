@@ -9,7 +9,7 @@ namespace ServicioRest5.Areas.Api.Models
     public class AlimentoManager
     {
         private static string cadenaConexion =
-            @"Server=DESKTOP-NSHQPSH;Initial Catalog=BDCalorias;Integrated Security=True"; //Integrated Security en True, 
+            @"Server=DESKTOP-3VURD55;Initial Catalog=BDCalorias;Integrated Security=True"; //Integrated Security en True, 
                                                                                            //lo cambio a false
 
         public bool InsertarAlimento(Alimento ali)
@@ -18,13 +18,13 @@ namespace ServicioRest5.Areas.Api.Models
 
             con.Open();
 
-            string sql = "INSERT INTO alimentos (email, password, foto) VALUES (@email, @password, @foto)";
+            string sql = "INSERT INTO alimentos (codigo, nombre, calorias) VALUES (@codigo, @nombre, @calorias)";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
-            cmd.Parameters.Add("@password", System.Data.SqlDbType.NVarChar).Value = usu.password;
-            cmd.Parameters.Add("@foto", System.Data.SqlDbType.NVarChar).Value = usu.foto;
+            cmd.Parameters.Add("@codigo", System.Data.SqlDbType.NVarChar).Value = ali.codigo;
+            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.NVarChar).Value = ali.nombre;
+            cmd.Parameters.Add("@calorias", System.Data.SqlDbType.NVarChar).Value = ali.calorias;
 
             int res = cmd.ExecuteNonQuery();
 
@@ -39,14 +39,14 @@ namespace ServicioRest5.Areas.Api.Models
 
             con.Open();
 
-            string sql = "UPDATE usuario SET email = @email, password = @password, foto = @foto" +
-                " WHERE email = @email";
+            string sql = "UPDATE Alimentos SET codigo = @codigo, nombre = @nombre, calorias = @calorias" +
+                " WHERE codigo = @codigo";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = usu.email;
-            cmd.Parameters.Add("@password", System.Data.SqlDbType.Int).Value = usu.password;
-            cmd.Parameters.Add("@foto", System.Data.SqlDbType.Int).Value = usu.foto;
+            cmd.Parameters.Add("@codigo", System.Data.SqlDbType.NVarChar).Value = ali.codigo;
+            cmd.Parameters.Add("@nombre", System.Data.SqlDbType.Int).Value = ali.nombre;
+            cmd.Parameters.Add("@calorias", System.Data.SqlDbType.Int).Value = ali.calorias;
 
             int res = cmd.ExecuteNonQuery();
 
@@ -63,11 +63,11 @@ namespace ServicioRest5.Areas.Api.Models
 
             con.Open();
 
-            string sql = "SELECT email, password, foto FROM usuario WHERE email = @email";
+            string sql = "SELECT codigo, nombre, calorias FROM Alimentos WHERE codigo = @codigo";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = email;
+            cmd.Parameters.Add("@codigo", System.Data.SqlDbType.Int).Value = codigo;
             SqlDataReader reader =
                  cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
@@ -76,8 +76,8 @@ namespace ServicioRest5.Areas.Api.Models
             {
                 ali = new Alimento();
                 ali.codigo = codigo;
-                usu.password = reader.GetString(1);
-                usu.foto = reader.GetString(2);
+                ali.nombre = reader.GetString(1);
+                ali.calorias = reader.GetInt32(2);//Me obliga a poner Int32 espero que no de problemas
             }
 
             reader.Close();
@@ -93,7 +93,7 @@ namespace ServicioRest5.Areas.Api.Models
 
             con.Open();
 
-            string sql = "SELECT email, password, foto FROM usuario";
+            string sql = "SELECT codigo, nombre, calorias FROM alimentos";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -105,9 +105,9 @@ namespace ServicioRest5.Areas.Api.Models
                 Alimento ali = new Alimento();
 
                 ali = new Alimento();
-                ali.codigo = reader.GetInt(0);
-                //usu.password = reader.GetString(1);
-                //usu.foto = reader.GetString(2);
+                ali.codigo = reader.GetInt32(0);
+                ali.nombre = reader.GetString(1);
+                ali.calorias = reader.GetInt32(2);
 
                 lista.Add(ali);
             }
@@ -117,17 +117,17 @@ namespace ServicioRest5.Areas.Api.Models
             return lista;
         }
 
-        public bool EliminarUsuario(string email)
+        public bool EliminarAlimento(int codigo)
         {
             SqlConnection con = new SqlConnection(cadenaConexion);
 
             con.Open();
 
-            string sql = "DELETE FROM usuario WHERE email= @email";
+            string sql = "DELETE FROM Alimentos WHERE codigo= @codigo";
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
-            cmd.Parameters.Add("@email", System.Data.SqlDbType.NVarChar).Value = email;
+            cmd.Parameters.Add("@codigo", System.Data.SqlDbType.Int).Value = codigo;
 
             int res = cmd.ExecuteNonQuery();
 
