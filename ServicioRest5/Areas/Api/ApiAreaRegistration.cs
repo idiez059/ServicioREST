@@ -34,6 +34,21 @@ namespace ServicioRest5.Areas.Api
                     action = "Usuarios"
                 }
             );
+            context.MapRoute("AccesoAlimentos",
+                "Api/Alimentos",
+                new
+                {
+                    controller = "Alimentos",
+                    action = "Alimento"
+                });
+            context.MapRoute("AccesoAlimentos",
+                "Api/Alimentos/Alimento/{codigo}",
+                new
+                {
+                    controller = "Alimentos",
+                    action = "Alimento",
+                    codigo = UrlParameter.Optional
+                });
 
             context.MapRoute(
                 "Api_default",
