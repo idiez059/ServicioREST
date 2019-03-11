@@ -24,10 +24,10 @@ namespace ServicioRest5.Areas.Api.Controllers
                 JsonRequestBehavior.AllowGet);
         }
 
-        // POST    /Api/Clientes/Cliente    { Nombre:"nombre", Telefono:123456789 }
-        // PUT     /Api/Clientes/Cliente/3  { Id:3, Nombre:"nombre", Telefono:123456789 }
-        // GET     /Api/Clientes/Cliente/3
-        // DELETE  /Api/Clientes/Cliente/3
+        // POST    /Api/Usuarios/Usuario    { email:"email", password:"password"}
+        // PUT     /Api/Usuarios/Usuario/email  { email:"email", password:"password"}
+        // GET     /Api/Usuarios/Usuario/email  ...
+        // DELETE  /Api/Usuarios/Usuario/email
         public JsonResult Usuario(string email, Usuario item) //quitado string?
         {
             switch (Request.HttpMethod)
