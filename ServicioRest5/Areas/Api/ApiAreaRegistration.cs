@@ -50,6 +50,23 @@ namespace ServicioRest5.Areas.Api
                     action = "Alimento",
                     codigo = UrlParameter.Optional
                 });
+            //para tabla calorías
+            context.MapRoute("AccesoCaloria",
+                "Api/Calorias",
+                new
+                {
+                    controller = "Calorias",
+                    action = "Calorias",
+
+                });
+            context.MapRoute("AccesoCalorias",
+                "Api/Calorias/Caloria/{codigo}",
+                new
+                {
+                    controller = "Calorias",
+                    action = "Caloria",
+                    codigo = UrlParameter.Optional
+                });
 
             context.MapRoute(
                 "Api_default",

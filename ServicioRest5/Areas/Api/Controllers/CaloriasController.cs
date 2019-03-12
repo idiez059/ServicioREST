@@ -8,20 +8,20 @@ using ServicioRest5;
 
 namespace ServicioRest5.Areas.Api.Controllers
 {
-    public class AlimentosController : Controller
+    public class CaloriasController : Controller
     {
-        private AlimentoManager alimentosManager;
+        private CaloriaManager caloriasManager;
 
-        public AlimentosController()
+        public CaloriasController()
         {
-         alimentosManager = new AlimentoManager();
+            caloriasManager = new CaloriaManager();
         }
 
         //el GET /Api/Alimentos
         [HttpGet]
-        public JsonResult Alimentos()
+        public JsonResult Calorias()
         {
-            return Json(alimentosManager.ObtenerAlimentos(),
+            return Json(caloriasManager.ObtenerCalorias(),
                 JsonRequestBehavior.AllowGet);
         }
 
@@ -29,29 +29,29 @@ namespace ServicioRest5.Areas.Api.Controllers
         // PUT     /Api/Alimentos/Alimento/3  { Id:3, Nombre:"nombre", Telefono:123456789 }
         // GET     /Api/Alimentos/Alimento/3
         // DELETE  /Api/Alimentos/Alimento/3
-        public JsonResult Alimento(int codigo, Alimento item) //quitado string?
+        public JsonResult Caloria(int codigo, Caloria item) //quitado string?
         {
             switch (Request.HttpMethod)
             {
                 case "POST":
-                    return Json(alimentosManager.InsertarAlimento(item));
+                    return Json(caloriasManager.InsertarCaloria(item));
                 case "PUT":
-                    return Json(alimentosManager.ActualizarAlimento(item));
+                    return Json(caloriasManager.ActualizarCaloria(item));
                 case "GET":
                     if (codigo != null)
                     {
-                        return Json(alimentosManager.ObtenerAlimento(codigo), //quitado GetValueOrDefault()
+                        return Json(caloriasManager.ObtenerCaloria(codigo), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
                     }
                     else
-                    {                        
-                        return Json(alimentosManager.ObtenerAlimentos(),
+                    {
+                        return Json(caloriasManager.ObtenerAlimentos(),
                         JsonRequestBehavior.AllowGet);
                     }
 
 
                 case "DELETE":
-                    return Json(alimentosManager.EliminarAlimento(codigo),
+                    return Json(caloriasManager.EliminarCaloria(codigo),
                         JsonRequestBehavior.AllowGet);
             }
 

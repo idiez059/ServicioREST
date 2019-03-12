@@ -112,9 +112,12 @@
   <ItemGroup>
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\AlimentosController.cs" />
+    <Compile Include="Areas\Api\Controllers\CaloriasController.cs" />
     <Compile Include="Areas\Api\Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Api\Models\Alimento.cs" />
     <Compile Include="Areas\Api\Models\AlimentoManager.cs" />
+    <Compile Include="Areas\Api\Models\Caloria.cs" />
+    <Compile Include="Areas\Api\Models\CaloriaManager.cs" />
     <Compile Include="Areas\Api\Models\Usuario.cs" />
     <Compile Include="Areas\Api\Models\UsuarioManager.cs" />
     <Compile Include="Global.asax.cs">
