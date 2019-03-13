@@ -17,7 +17,7 @@ namespace ServicioRest5.Areas.Api.Controllers
             caloriasManager = new CaloriaManager();
         }
 
-        //el GET /Api/Alimentos
+        //el GET /Api/Calorias
         [HttpGet]
         public JsonResult Calorias()
         {
@@ -25,11 +25,11 @@ namespace ServicioRest5.Areas.Api.Controllers
                 JsonRequestBehavior.AllowGet);
         }
 
-        // POST    /Api/Alimentos/Alimento    { Nombre:"nombre", Telefono:123456789 }
-        // PUT     /Api/Alimentos/Alimento/3  { Id:3, Nombre:"nombre", Telefono:123456789 }
-        // GET     /Api/Alimentos/Alimento/3
-        // DELETE  /Api/Alimentos/Alimento/3
-        public JsonResult Caloria(int codigo, Caloria item) //quitado string?
+        // POST    /Api/Calorias/Caloria    { Nombre:"nombre", Telefono:123456789 }
+        // PUT     /Api/Calorias/Caloria/3  { Id:3, Nombre:"nombre", Telefono:123456789 }
+        // GET     /Api/Calorias/Caloria/3
+        // DELETE  /Api/Calorias/Caloria/3
+        public JsonResult Caloria(String email, Caloria item) //Habría que retocarlo si queremos pedir una en particular
         {
             switch (Request.HttpMethod)
             {
@@ -38,27 +38,27 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "PUT":
                     return Json(caloriasManager.ActualizarCaloria(item));
                 case "GET":
-                    if (codigo != null)
+                    if (email != null)
                     {
-                        return Json(caloriasManager.ObtenerCaloria(codigo), //quitado GetValueOrDefault()
+                        return Json(caloriasManager.ObtenerCaloria(email), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
                     }
                     else
                     {
-                        return Json(caloriasManager.ObtenerAlimentos(),
+                        return Json(caloriasManager.ObtenerCalorias(),
                         JsonRequestBehavior.AllowGet);
                     }
 
 
                 case "DELETE":
-                    return Json(caloriasManager.EliminarCaloria(codigo),
+                    return Json(caloriasManager.EliminarCaloria(email),
                         JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { Error = true, Message = "Operación HTTP desconocida" });
         }
         //
-        // GET: /Api/Alimentos/
+        // GET: /Api/Calorias/
 
         public ActionResult Index()
         {

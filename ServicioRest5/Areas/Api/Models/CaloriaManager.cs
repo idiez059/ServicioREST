@@ -42,8 +42,9 @@ namespace ServicioRest5.Areas.Api.Models
 
             con.Open();
 
-            string sql = "UPDATE usuario SET email = @email, password = @password, foto = @foto" +
-                " WHERE email = @email";
+            string sql = "UPDATE calorias SET email = @email, fecha = @fecha, tipocomida = @tipocomida," +
+                " codigoalimento = @codigoalimento, cantidad = @cantidad" +
+                " WHERE email = @email"; //Esto habría que retocarlo si queremos usarlo
 
             SqlCommand cmd = new SqlCommand(sql, con);
 
