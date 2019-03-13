@@ -38,7 +38,7 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "PUT":
                     return Json(alimentosManager.ActualizarAlimento(item));
                 case "GET":
-                    if (codigo != null)
+                    if (codigo != null)//esto nunca va a ser null, ya se obtienen todos más arriba
                     {
                         return Json(alimentosManager.ObtenerAlimento(codigo), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);

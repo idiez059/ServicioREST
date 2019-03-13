@@ -28,7 +28,7 @@ namespace ServicioRest5.Areas.Api.Controllers
         // PUT     /Api/Usuarios/Usuario/email  { email:"email", password:"password"}
         // GET     /Api/Usuarios/Usuario/email  ...
         // DELETE  /Api/Usuarios/Usuario/email
-        public JsonResult Usuario(string email, Caloria item) //quitado string?
+        public JsonResult Usuario(string email, Usuario item) //quitado string?
         {
             switch (Request.HttpMethod)
             {
@@ -37,7 +37,7 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "PUT":
                     return Json(usuariosManager.ActualizarUsuario(item));
                 case "GET":
-                    if(email != null)
+                    if(email != null)//Esto nunca va a ser null, ya se obtienen todos más arriba
                     {
                         return Json(usuariosManager.ObtenerUsuario(email), //quitado GetValueOrDefault()
                           JsonRequestBehavior.AllowGet);

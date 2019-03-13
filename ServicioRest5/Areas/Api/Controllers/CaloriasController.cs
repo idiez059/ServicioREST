@@ -38,7 +38,7 @@ namespace ServicioRest5.Areas.Api.Controllers
                 case "PUT":
                     return Json(caloriasManager.ActualizarCaloria(item));
                 case "GET":
-                    if (email != null)
+                    if (email != null)//nunca va a ser null, ya se obtienen todos más arriba
                     {
                         return Json(caloriasManager.ObtenerCaloria(email), //quitado GetValueOrDefault()
                         JsonRequestBehavior.AllowGet);
